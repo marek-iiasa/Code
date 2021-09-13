@@ -17,6 +17,13 @@ class catalog:
 		self.sort()
 		self.show()
 		self.save()
+		s = input('Would you like to search the books? (y/n)   ')
+		if s == 'y':
+			while True:
+				self.search()
+				s = input('Would you like to search the books again? (y/n)   ')
+				if s == 'n':
+					break
 	
 	"""def add_book(self):
 		title = input("What is the book's title?   ")
@@ -45,6 +52,19 @@ class catalog:
 	def sort(self):
 		self.books.sort()
 		self.old_books.sort()
+	
+	def search(self):
+
+		from fuzzywuzzy import process
+
+		# for process library,
+		query = input('What book are you looking for? (write it like this: title, author)')
+		qs = self.books + self.old_books
+
+		one = process.extractOne(query, qs)
+		print('Is this the book you want?')
+		print(one[0])
+
 
 books = []
 while True:
